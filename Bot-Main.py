@@ -14,10 +14,10 @@ while True:
 def main():
     reddit = praw.Reddit(
         client_id="UiQWFajVtcRFM_4VxsSKoA",
-        client_secret="***REMOVED***",
+        client_secret="******",
         user_agent="<console:Farnsworth:1.0>",
         username="Prof-Farnsworth-bot",
-        password="***REMOVED***"
+        password="*****"
     )
 
     subreddit = reddit.subreddit("futurama")
