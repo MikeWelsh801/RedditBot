@@ -3,21 +3,15 @@ import random
 import time
 
 # read in quotes from file
-farnsworth_quotes = []
 file1 = open("FarnQuotes.txt", "r")
-while True:
-    line = file1.readline()
-    if not line:
-        break
-    farnsworth_quotes.append(line)
+farnsworth_quotes = file1.readlines()
 
 
 def main():
 
     # read credentials from file
     file = open("Bot")
-    pw = file.readline()
-    pw = pw.strip('\n')
+    pw = file.readline().strip('\n')
     secret = file.readline()
 
     # instantiate reddit
@@ -31,11 +25,14 @@ def main():
 
     # loop through submissions and parse
     subreddit = reddit.subreddit("futurama")
-    for submission in subreddit.hot(limit=50):
+    for submission in subreddit.hot(limit=10):
         parse_submission(submission)
 
 
 def parse_submission(submission):
+    """Parses a submission in r/futurama and replies to any that contains professor
+    or farnsworth with a random quote."""
+
     # loop through comments and check if comments contain professor
     submission.comments.replace_more(limit=None)
     for comment in submission.comments.list():
@@ -43,7 +40,7 @@ def parse_submission(submission):
             comment_lower = comment.body.lower()
             if "farnsworth" in comment_lower or "professor" in comment_lower:
 
-                # choose random comment and print replied to/reply
+                # choose random quote and print replied to/reply
                 print("---------")
                 print("Replied to: ", comment.body)
                 random_index = random.randint(0, len(farnsworth_quotes) - 1)
