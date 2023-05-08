@@ -25,7 +25,7 @@ def main():
 
     # loop through submissions and parse
     subreddit = reddit.subreddit("futurama")
-    for submission in subreddit.hot(limit=10):
+    for submission in subreddit.hot(limit=50):
         parse_submission(submission)
 
 
